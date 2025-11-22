@@ -1,0 +1,49 @@
+/// Insercion de atos 
+
+db.personas.insertOne({
+  "ID": "201",
+  "Nombre": "Juan",
+  "Apellido": "Sierra",
+  "Profesión": "Ingeniero",
+  "Edad": 30,
+  "País": "Colombia"
+});
+
+///  Consultas con filtros y operadores
+
+{ "Edad": 50 } }
+
+{Profesión: { $eq: "Arquitecto" },
+  País: { $eq: "Colombia" }}
+
+  ///Consulta de contar
+
+  db.personas.aggregate([
+  {
+    $group: {
+      _id: "$Ingeniero",
+      count: { $sum: 1 }
+    }
+  }
+]);
+ /// Calcular el Promedio 
+
+db.personas.aggregate([
+  {
+    $group: {
+      _id: null,
+      averageAge: { $avg: "$Edad" }
+    }
+  }
+]);
+
+/// Consulta de suma 
+
+db.personas.aggregate([
+  {
+    $group: {
+      _id: "$País",
+      maxEdad: { $max: "$Edad" }
+    }
+  }
+]);
